@@ -9,16 +9,17 @@
   <style>
     :root{
       --bg:#0b0f0e;
-      --ink:#f6f2e9;
-      --muted:#c5c2b9;
+      --ink:#f7f3ea;
+      --muted:#d0cec5;
+      --muted-2:#aaa89f;
       --line:rgba(245,242,232,.16);
       --glass:rgba(8,13,12,.66);
-      --glass-strong:rgba(7,11,10,.82);
+      --glass-strong:rgba(7,11,10,.84);
       --accent:#dfca98;
       --accent-soft:rgba(223,202,152,.16);
-      --good:#a9d9bf;
-      --warn:#eed49b;
-      --bad:#f0aaaa;
+      --good:#b7e4cb;
+      --warn:#f1dba6;
+      --bad:#ffb5b5;
       --shadow:0 18px 60px rgba(0,0,0,.38);
       --radius:24px;
     }
@@ -54,102 +55,145 @@
     }
     button,input,select{font:inherit}
     button{cursor:pointer}
-    .shell{width:min(1080px,100%);margin:0 auto;padding:18px 16px 34px}
+    button,input,select{touch-action:manipulation}
+    .shell{width:min(1080px,100%);margin:0 auto;padding:18px 16px 40px}
     .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
     .brand{display:flex;align-items:center;gap:10px}
     .mark{width:34px;height:34px;border:1px solid rgba(223,202,152,.55);border-radius:50%;display:grid;place-items:center;background:rgba(10,15,13,.58);box-shadow:0 8px 30px rgba(0,0,0,.2)}
     .mark::before{content:"✦";font-size:13px;color:var(--accent)}
-    .brand-copy small{display:block;color:#cbc8bf;letter-spacing:.18em;text-transform:uppercase;font-size:8px}
-    .brand-copy strong{display:block;font-family:Georgia,"Times New Roman",serif;letter-spacing:.18em;font-size:13px;font-weight:500}
-    .status-dot{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(7,12,11,.5);font-size:11px;color:#d6d2c8}
+    .brand-copy small{display:block;color:#d4d1c8;letter-spacing:.18em;text-transform:uppercase;font-size:10px}
+    .brand-copy strong{display:block;font-family:Georgia,"Times New Roman",serif;letter-spacing:.18em;font-size:14px;font-weight:500}
+    .status-dot{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(7,12,11,.5);font-size:12px;color:#dedbd2}
     .status-dot i{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 12px rgba(169,217,191,.8)}
 
     .hero{position:relative;border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,rgba(12,18,16,.72),rgba(8,12,11,.58));box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
-    .hero::after{content:"BALANCE";position:absolute;right:-18px;top:70px;font-family:Georgia,"Times New Roman",serif;font-size:62px;letter-spacing:.28em;writing-mode:vertical-rl;color:rgba(245,242,232,.035);pointer-events:none}
     .hero-inner{padding:24px}
-    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:10px;letter-spacing:.24em;text-transform:uppercase}
+    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:11px;letter-spacing:.24em;text-transform:uppercase}
     .eyebrow span{width:28px;height:1px;background:var(--accent);opacity:.85}
     h1{margin:11px 0 0;font:500 clamp(30px,8vw,56px)/.98 Georgia,"Times New Roman",serif;letter-spacing:-.025em;max-width:760px}
-    .hero-sub{margin:12px 0 0;max-width:680px;color:#c9c6bc;font-size:13px;line-height:1.55}
+    .hero-sub{margin:12px 0 0;max-width:680px;color:#d1cec5;font-size:13px;line-height:1.55}
+    .debt-free-note{margin:10px 0 0;color:#ded9ca;font-size:12px;line-height:1.4}
+    .debt-free-note strong{color:var(--accent);font-weight:700}
 
     .grid{display:grid;gap:14px}
     .summary-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:18px}
     .card{border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:var(--radius);box-shadow:0 12px 40px rgba(0,0,0,.2)}
     .metric{padding:18px;min-height:118px}
-    .metric .label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#aaa89f}
-    .metric .value{font-size:clamp(21px,5vw,30px);font-weight:620;letter-spacing:-.03em;margin-top:9px}
-    .metric .hint{font-size:10px;color:#aaa89f;margin-top:6px;line-height:1.35}
+    .metric .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#c8c5bc}
+    .metric .value{font-size:clamp(21px,5vw,30px);font-weight:620;letter-spacing:-.03em;margin-top:9px;font-variant-numeric:tabular-nums}
+    .metric .hint{font-size:12px;color:#c0bdb4;margin-top:6px;line-height:1.35}
     .metric.accent{background:linear-gradient(145deg,rgba(223,202,152,.16),rgba(9,13,12,.66));border-color:rgba(223,202,152,.25)}
     .value.positive{color:var(--good)} .value.warning{color:var(--warn)} .value.negative{color:var(--bad)}
 
     .section{padding:18px}
     .section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
     .section-title{font:500 22px Georgia,"Times New Roman",serif;letter-spacing:.01em}
-    .section-copy{margin-top:4px;color:#aaa89f;font-size:11px;line-height:1.45}
+    .section-copy{margin-top:4px;color:#c1beb5;font-size:12px;line-height:1.45}
     .section-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 
     .controls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     .field{display:flex;flex-direction:column;gap:7px}
-    label{font-size:10px;color:#afada4;letter-spacing:.11em;text-transform:uppercase}
+    label{font-size:11px;color:#c7c4bb;letter-spacing:.11em;text-transform:uppercase}
     input,select{
       width:100%;height:46px;border-radius:14px;border:1px solid rgba(245,242,232,.12);
       background:rgba(255,255,255,.045);color:var(--ink);padding:0 13px;outline:none;
-      transition:.18s ease;border-color 180ms ease,background 180ms ease,box-shadow 180ms ease;
+      transition:border-color 180ms ease,background 180ms ease,box-shadow 180ms ease;
+      font-size:14px;
     }
     input:focus,select:focus{border-color:rgba(223,202,152,.7);background:rgba(255,255,255,.07);box-shadow:0 0 0 3px rgba(223,202,152,.08)}
-    input::placeholder{color:#7f7e78}
+    input::placeholder{color:#99978f}
     select option{background:#161a18;color:#fff}
-    .btn{border:1px solid rgba(245,242,232,.13);background:rgba(255,255,255,.06);color:var(--ink);height:44px;padding:0 14px;border-radius:13px;transition:.18s ease;white-space:nowrap}
+    .currency-input{position:relative}
+    .currency-input .prefix{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#ded9ca;font-size:14px;pointer-events:none;z-index:1}
+    .currency-input input{padding-left:29px;font-variant-numeric:tabular-nums}
+    input[type="number"]{font-variant-numeric:tabular-nums}
+
+    .btn{border:1px solid rgba(245,242,232,.13);background:rgba(255,255,255,.06);color:var(--ink);min-height:44px;padding:0 14px;border-radius:13px;transition:transform 180ms ease,background 180ms ease,filter 180ms ease,border-color 180ms ease;white-space:nowrap}
     .btn:hover{background:rgba(255,255,255,.11);transform:translateY(-1px)}
     .btn.primary{background:var(--accent);color:#151410;border-color:transparent;font-weight:650}
     .btn.primary:hover{filter:brightness(1.03)}
     .btn.ghost{background:transparent}
-    .btn.danger{color:#efb0b0}
-    .btn.tiny{height:34px;padding:0 10px;border-radius:10px;font-size:11px}
+    .btn.danger{color:#f3b5b5}
+    .btn.tiny{min-height:44px;height:44px;padding:0 12px;border-radius:11px;font-size:12px}
 
     .debt-list{display:flex;flex-direction:column;gap:10px}
-    .debt-row{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(110px,.75fr) 130px 120px 36px;align-items:center;gap:10px;padding:12px;border:1px solid rgba(245,242,232,.09);border-radius:17px;background:rgba(255,255,255,.035)}
-    .debt-name{min-width:0}.debt-name strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.debt-name span{display:block;font-size:10px;color:#92918a;margin-top:4px}
-    .debt-amount{font-weight:650}.debt-meta{font-size:10px;color:#aaa79e}
-    .empty{padding:22px;border:1px dashed rgba(245,242,232,.16);border-radius:18px;text-align:center;color:#aaa89f;font-size:12px}
+    .debt-row{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(110px,.75fr) 130px 120px 44px;align-items:center;gap:10px;padding:12px;border:1px solid rgba(245,242,232,.09);border-radius:17px;background:rgba(255,255,255,.035)}
+    .debt-name{min-width:0}.debt-name strong{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.debt-name span{display:block;font-size:12px;color:#b5b2aa;margin-top:4px;line-height:1.35}
+    .debt-amount{font-weight:650;font-size:14px;font-variant-numeric:tabular-nums}.debt-meta{font-size:12px;color:#b7b4ac;font-variant-numeric:tabular-nums}
+    .empty{padding:24px;border:1px dashed rgba(245,242,232,.16);border-radius:18px;text-align:center;color:#c0bdb5;font-size:13px;line-height:1.5}
+    .empty p{margin:0 0 13px}
 
-    .timeline{display:flex;flex-direction:column;gap:10px}
-    .month{padding:15px;border:1px solid rgba(245,242,232,.09);border-radius:18px;background:rgba(255,255,255,.033);overflow:hidden}
-    .month-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
-    .month-name{font:500 18px Georgia,"Times New Roman",serif}.month-balance{font-weight:700;font-size:16px}.month-balance.negative{color:var(--bad)}.month-balance.positive{color:var(--good)}
-    .bar{height:7px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden;margin:10px 0 12px}.bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#9d9478,#dfca98);min-width:2px}
-    .month-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mini{padding:8px 9px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.05)}.mini b{display:block;font-size:11px}.mini span{display:block;color:#92918a;font-size:9px;margin-top:3px}
+    .forecast-alert{display:none;align-items:flex-start;gap:10px;margin-bottom:12px;padding:12px 13px;border:1px solid rgba(255,181,181,.38);border-radius:16px;background:rgba(115,31,31,.18);color:#f5dede}
+    .forecast-alert.show{display:flex}
+    .forecast-alert .icon{width:24px;height:24px;display:grid;place-items:center;border-radius:8px;background:rgba(255,181,181,.12);color:var(--bad);flex:0 0 auto}
+    .forecast-alert strong{display:block;font-size:13px}.forecast-alert span{display:block;color:#ddc5c5;font-size:12px;margin-top:2px;line-height:1.4}
 
-    .footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 4px 0;color:#898881;font-size:10px}
-    .footer .quote{font-family:Georgia,"Times New Roman",serif;font-size:12px;color:#aaa79e}
+    .chart-card{padding:14px;border-radius:18px;border:1px solid rgba(245,242,232,.09);background:rgba(255,255,255,.028);margin-bottom:12px}
+    .chart-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:7px}
+    .chart-head strong{font:500 18px Georgia,"Times New Roman",serif}.chart-head span{font-size:12px;color:#bab7ae}
+    .chart-wrap{position:relative;width:100%;height:220px}
+    #balanceChart{display:block;width:100%;height:100%;overflow:visible}
+    #balanceChart text{font-family:Inter,ui-sans-serif,system-ui,sans-serif;fill:#bab7ae;font-size:10px}
+    .chart-note{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:5px;color:#aaa79e;font-size:11px}
+    .chart-note .positive{color:var(--good)}.chart-note .negative{color:var(--bad)}
 
-    .modal-backdrop{position:fixed;inset:0;background:rgba(2,5,4,.64);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:30}
+    .timeline{display:flex;flex-direction:column;gap:8px}
+    .month{border:1px solid rgba(245,242,232,.09);border-radius:16px;background:rgba(255,255,255,.033);overflow:hidden;transition:border-color 180ms ease,background 180ms ease,box-shadow 180ms ease}
+    .month.problem{border-color:rgba(255,181,181,.55);box-shadow:inset 0 0 0 1px rgba(255,181,181,.08),0 8px 30px rgba(75,12,12,.15)}
+    .month-toggle{width:100%;border:0;background:transparent;color:inherit;text-align:left;padding:13px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:10px;min-height:64px}
+    .month-toggle:hover{background:rgba(255,255,255,.025)}
+    .month-toggle .month-arrow{width:28px;height:28px;border-radius:9px;border:1px solid rgba(245,242,232,.11);display:grid;place-items:center;color:#c4c0b7;font-size:14px;transition:transform 180ms ease}
+    .month.open .month-arrow{transform:rotate(180deg)}
+    .month-summary{display:block;min-width:0}.month-name{display:block;font:500 18px Georgia,"Times New Roman",serif}.month-sub{display:block}.month-balance{font-weight:700;font-size:16px;font-variant-numeric:tabular-nums}.month-balance.negative{color:var(--bad)}.month-balance.positive{color:var(--good)}
+    .month-sub{font-size:12px;color:#aaa79e;margin-top:3px;line-height:1.35}
+    .month-details{display:none;padding:0 14px 14px}.month.open .month-details{display:block}
+    .bar{height:7px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden;margin:0 0 12px}.bar i{display:block;height:100%;border-radius:inherit;min-width:2px}.bar i.positive{background:linear-gradient(90deg,#7aa88e,#b7e4cb)}.bar i.negative{background:linear-gradient(90deg,#a45d5d,#ffb5b5)}
+    .month-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mini{padding:9px 10px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.05)}.mini b{display:block;font-size:12px;font-variant-numeric:tabular-nums}.mini span{display:block;color:#b5b2aa;font-size:11px;margin-top:3px}
+
+    .footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 4px 0;color:#aaa79e;font-size:11px}.footer .quote{font-family:Georgia,"Times New Roman",serif;font-size:13px;color:#bdb9af}
+
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,5,4,.64);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;z-index:30}
     .modal-backdrop.show{display:flex}
-    .modal{width:min(520px,100%);border:1px solid rgba(245,242,232,.16);background:rgba(10,15,13,.96);border-radius:26px 26px 18px 18px;box-shadow:0 30px 80px rgba(0,0,0,.55);overflow:hidden;animation:rise .22s ease}
-    @keyframes rise{from{transform:translateY(22px);opacity:0}to{transform:none;opacity:1}}
+    .modal{width:min(520px,100%);border:1px solid rgba(245,242,232,.16);background:rgba(10,15,13,.96);border-radius:26px;box-shadow:0 30px 80px rgba(0,0,0,.55);overflow:hidden;animation:rise .22s ease}
+    @keyframes rise{from{transform:translateY(14px) scale(.985);opacity:0}to{transform:none;opacity:1}}
     .modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 18px 14px;border-bottom:1px solid var(--line)}
     .modal-head strong{font:500 21px Georgia,"Times New Roman",serif}.modal-body{padding:16px 18px}.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.modal-grid .full{grid-column:1/-1}
     .modal-foot{display:flex;justify-content:flex-end;gap:8px;padding:13px 18px 18px;border-top:1px solid var(--line)}
-    @media (max-width:620px){.modal-grid{grid-template-columns:1fr}.modal-grid .full{grid-column:auto}.modal-backdrop{padding:8px}.modal{border-radius:24px 24px 16px 16px}}
 
-    .toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);padding:11px 14px;border-radius:999px;border:1px solid rgba(245,242,232,.14);background:rgba(7,11,10,.92);backdrop-filter:blur(10px);font-size:11px;opacity:0;pointer-events:none;transition:.22s ease;z-index:20;box-shadow:0 10px 35px rgba(0,0,0,.4)}
-    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);padding:8px 8px 8px 13px;border-radius:999px;border:1px solid rgba(245,242,232,.14);background:rgba(7,11,10,.94);backdrop-filter:blur(10px);display:flex;align-items:center;gap:10px;font-size:12px;opacity:0;pointer-events:none;transition:opacity 220ms ease,transform 220ms ease;z-index:40;box-shadow:0 10px 35px rgba(0,0,0,.4)}
+    .toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}.toast-message{white-space:nowrap}.toast-action{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid rgba(223,202,152,.28);background:rgba(223,202,152,.1);color:var(--accent);font-weight:650}
 
-    @media (max-width:850px){
+    .fab{display:none}
+    .tabular{font-variant-numeric:tabular-nums}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+    @media (max-width:900px){
       .summary-grid{grid-template-columns:repeat(2,1fr)}
-      .debt-row{grid-template-columns:minmax(0,1fr) auto auto 34px}
-      .debt-row > .mobile-hide{display:none}
+      .debt-row{grid-template-columns:minmax(0,1fr) auto minmax(82px,.65fr) 120px 44px}
     }
     @media (max-width:620px){
-      .shell{padding:10px 10px calc(20px + env(safe-area-inset-bottom))}
-      .topbar{margin-bottom:10px}.hero{border-radius:24px}.hero-inner{padding:18px}.hero::after{font-size:43px;right:-13px;top:72px}
-      h1{font-size:35px;max-width:90%}.hero-sub{font-size:12px;max-width:92%}
+      .modal-backdrop{align-items:flex-end;padding:8px}
+      .modal{border-radius:24px 24px 16px 16px}
+      .toast{bottom:calc(76px + env(safe-area-inset-bottom))}
+      .shell{padding:10px 10px calc(84px + env(safe-area-inset-bottom))}
+      .topbar{margin-bottom:10px}.hero{border-radius:24px}.hero-inner{padding:18px}
+      h1{font-size:35px;max-width:92%}.hero-sub{font-size:13px;max-width:94%}.debt-free-note{font-size:12px}
       .summary-grid{grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}.metric{min-height:105px;padding:14px;border-radius:20px}.metric .value{font-size:22px}
       .section{padding:14px;border-radius:20px}.section-title{font-size:20px}.section-head{align-items:center}.controls{grid-template-columns:1fr}
-      .debt-row{grid-template-columns:minmax(0,1fr) auto 32px;padding:11px;border-radius:15px}.debt-row .meta-cell{display:none}
-      .month{border-radius:16px}.month-stats{grid-template-columns:1fr 1fr 1fr}.mini{padding:8px 7px}.mini b{font-size:10px}
+      .debt-row{grid-template-columns:minmax(0,1fr) auto auto auto;padding:10px;border-radius:15px}.debt-row .payment-meta{display:none}.debt-name strong{font-size:13px}.debt-name span{font-size:11px}.debt-amount{font-size:13px}
+      .btn.tiny{min-height:44px;height:44px}
+      .forecast-alert{padding:11px 12px}.chart-card{padding:10px}.chart-wrap{height:205px}
+      .month-toggle{grid-template-columns:minmax(0,1fr) auto auto;min-height:62px;padding:11px 12px}.month-name{font-size:17px}.month-balance{font-size:15px}.month-sub{font-size:11px}.month-details{padding:0 12px 12px}
+      .month-stats{grid-template-columns:1fr 1fr 1fr}.mini{padding:8px 7px}.mini b{font-size:11px}.mini span{font-size:10px}
       .footer{flex-direction:column;align-items:flex-start;padding:10px 4px 0}
-      .status-dot span{display:none}
+      .status-dot{font-size:10px;padding:7px 8px;gap:5px;max-width:52vw}
+      .status-dot span{display:inline;white-space:normal;line-height:1.2}
+      .section-actions #addDebt{display:none}
+      .fab{position:fixed;display:flex;align-items:center;justify-content:center;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));height:52px;padding:0 18px;border-radius:999px;background:var(--accent);color:#151410;border:0;font-weight:750;box-shadow:0 14px 34px rgba(0,0,0,.42);z-index:25}
+    }
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
     }
   </style>
 </head>
@@ -160,7 +204,7 @@
         <div class="mark" aria-hidden="true"></div>
         <div class="brand-copy"><small>Personal finance</small><strong>INNER LEDGER</strong></div>
       </div>
-      <div class="status-dot"><i></i><span>Saved on this device</span></div>
+      <div class="status-dot" aria-live="polite"><i></i><span>Saved on this device</span></div>
     </header>
 
     <section class="hero">
@@ -168,10 +212,11 @@
         <div class="eyebrow"><span></span>Find your balance</div>
         <h1>Your money, after the obligations.</h1>
         <p class="hero-sub">Enter your starting cash, incoming money and debts. The ledger projects what remains after the debts you list — month by month.</p>
+        <p id="debtFreeNote" class="debt-free-note">Add a debt to see your debt-free date.</p>
 
         <div class="grid summary-grid">
           <div class="card metric accent"><div class="label">This month left</div><div id="kpiCurrent" class="value">₹0</div><div class="hint">After listed debt payments</div></div>
-          <div class="card metric"><div class="label">Monthly income</div><div id="kpiIncome" class="value">₹0</div><div class="hint">Recurring + one-off in view</div></div>
+          <div class="card metric"><div class="label">Monthly income</div><div id="kpiIncome" class="value">₹0</div><div id="kpiIncomeHint" class="hint">Recurring income</div></div>
           <div class="card metric"><div class="label">Debt this month</div><div id="kpiDebt" class="value">₹0</div><div class="hint">Payments currently due</div></div>
           <div class="card metric"><div class="label">12-month ending</div><div id="kpiYear" class="value">₹0</div><div class="hint">Projected cash after debts</div></div>
         </div>
@@ -183,8 +228,8 @@
         <div><div class="section-title">Starting position</div><div class="section-copy">The amount already available before this month's income and payments.</div></div>
       </div>
       <div class="controls">
-        <div class="field"><label for="startBalance">Cash on hand</label><input id="startBalance" type="number" min="0" step="100" placeholder="0" /></div>
-        <div class="field"><label for="monthlyIncome">Recurring monthly income</label><input id="monthlyIncome" type="number" min="0" step="100" placeholder="0" /></div>
+        <div class="field"><label for="startBalance">Cash on hand</label><div class="currency-input"><span class="prefix" aria-hidden="true">₹</span><input id="startBalance" type="number" step="any" inputmode="decimal" placeholder="0" /></div></div>
+        <div class="field"><label for="monthlyIncome">Recurring monthly income</label><div class="currency-input"><span class="prefix" aria-hidden="true">₹</span><input id="monthlyIncome" type="number" min="0" step="any" inputmode="decimal" placeholder="0" /></div></div>
         <div class="field"><label for="incomeNote">Income label</label><input id="incomeNote" type="text" maxlength="32" placeholder="Salary, stipend, etc." /></div>
       </div>
     </section>
@@ -202,47 +247,48 @@
         <div><div class="section-title">12-month path</div><div class="section-copy">A simple carry-forward forecast. Income is added, listed debt payments are removed.</div></div>
         <button id="exportBtn" class="btn tiny">Export JSON</button>
       </div>
+      <div id="forecastAlert" class="forecast-alert" role="status" aria-live="polite"></div>
+      <div class="chart-card">
+        <div class="chart-head"><strong>Balance path</strong><span id="chartRange">12-month projection</span></div>
+        <div class="chart-wrap"><svg id="balanceChart" role="img" aria-label="Projected balance across the next twelve months"></svg></div>
+        <div id="chartNote" class="chart-note"></div>
+      </div>
       <div id="timeline" class="timeline"></div>
       <div class="footer"><div class="quote">“A clear ledger makes the mountain smaller.”</div><div>Not financial advice · projections only</div></div>
     </section>
   </main>
 
+  <button id="addDebtFab" class="fab" aria-label="Add a debt">+ Add debt</button>
+
   <div id="modalBackdrop" class="modal-backdrop" aria-hidden="true">
-    <form id="debtForm" class="modal" autocomplete="off">
+    <form id="debtForm" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" autocomplete="off">
       <div class="modal-head"><strong id="modalTitle">Add debt</strong><button type="button" id="closeModal" class="btn tiny ghost" aria-label="Close">×</button></div>
       <div class="modal-body">
         <div class="modal-grid">
           <div class="field full"><label for="debtName">Debt / commitment</label><input id="debtName" required maxlength="40" placeholder="RBL card, loan EMI, etc." /></div>
-          <div class="field"><label for="debtAmount">Payment amount (₹)</label><input id="debtAmount" required type="number" min="0" step="100" placeholder="0" /></div>
+          <div class="field"><label for="debtAmount">Payment amount (₹)</label><div class="currency-input"><span class="prefix" aria-hidden="true">₹</span><input id="debtAmount" required type="number" min="0" step="any" inputmode="decimal" placeholder="0" /></div></div>
           <div class="field"><label for="debtStart">First payment</label><input id="debtStart" required type="month" /></div>
           <div class="field"><label for="debtType">Frequency</label><select id="debtType"><option value="recurring">Every month</option><option value="once">One time</option></select></div>
-          <div class="field" id="monthsWrap"><label for="debtMonths">Number of months</label><input id="debtMonths" type="number" min="1" step="1" value="3" /></div>
+          <div class="field" id="monthsWrap"><label for="debtMonths">Number of months</label><input id="debtMonths" type="number" min="1" step="1" value="3" inputmode="numeric" /></div>
         </div>
       </div>
       <div class="modal-foot"><button type="button" id="cancelModal" class="btn">Cancel</button><button class="btn primary" type="submit">Save debt</button></div>
     </form>
   </div>
 
-  <div id="toast" class="toast"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"><span class="toast-message"></span><button type="button" class="toast-action" hidden></button></div>
 
   <script>
     const STORAGE_KEY = 'inner-ledger-v1';
     const monthFormatter = new Intl.DateTimeFormat('en-IN', {month:'short', year:'numeric'});
-    const monthOnlyFormatter = new Intl.DateTimeFormat('en-IN', {month:'long'});
     const money = new Intl.NumberFormat('en-IN', {style:'currency', currency:'INR', maximumFractionDigits:0});
 
     const uid = () => Math.random().toString(36).slice(2,10);
     const currentMonthKey = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`; };
     const addMonths = (key, n) => { const [y,m]=key.split('-').map(Number); const d=new Date(y,m-1+n,1); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`; };
     const fmtMonth = key => monthFormatter.format(new Date(Number(key.slice(0,4)), Number(key.slice(5,7))-1, 1));
-    const fmtFullMonth = key => monthOnlyFormatter.format(new Date(Number(key.slice(0,4)), Number(key.slice(5,7))-1, 1));
 
-    const defaultState = {
-      startBalance: 0,
-      monthlyIncome: 0,
-      incomeNote: 'Salary',
-      debts: []
-    };
+    const defaultState = { startBalance: 0, monthlyIncome: 0, incomeNote: 'Salary', debts: [] };
 
     function load(){
       try{
@@ -254,9 +300,28 @@
     }
     let state = load();
 
+    function setSaveStatus(ok){
+      const status=document.querySelector('.status-dot');
+      const label=status?.querySelector('span');
+      const dot=status?.querySelector('i');
+      if(!status || !label || !dot) return;
+      label.textContent=ok?'Saved on this device':'Storage unavailable — changes remain for this session';
+      dot.style.background=ok?'var(--good)':'var(--warn)';
+      dot.style.boxShadow=ok?'0 0 12px rgba(169,217,191,.8)':'0 0 12px rgba(238,212,155,.8)';
+    }
+
     function save(silent=false){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      if(!silent) toast('Saved');
+      try{
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        setSaveStatus(true);
+        if(!silent) toast('Saved');
+        return true;
+      } catch(err){
+        console.error('Inner Ledger could not save to local storage:', err);
+        setSaveStatus(false);
+        if(!silent) toast('Could not save on this device');
+        return false;
+      }
     }
 
     function activePayment(debt, key){
@@ -274,8 +339,8 @@
       const start = currentMonthKey();
       for(let i=0;i<12;i++){
         const key=addMonths(start,i);
-        let income = Number(state.monthlyIncome)||0;
-        let debt = state.debts.reduce((sum,d)=>sum+activePayment(d,key),0);
+        const income = Number(state.monthlyIncome)||0;
+        const debt = state.debts.reduce((sum,d)=>sum+activePayment(d,key),0);
         const end = balance + income - debt;
         months.push({key,income,debt,start:balance,end});
         balance=end;
@@ -289,37 +354,104 @@
       document.getElementById('incomeNote').value = state.incomeNote || '';
     }
 
+    function debtEndLabel(d){
+      const start=d.startMonth||currentMonthKey();
+      if(d.type==='once') return fmtMonth(start);
+      const months=Math.max(1,Math.floor(Number(d.months)||1));
+      return `${fmtMonth(start)} → ${fmtMonth(addMonths(start,months-1))}`;
+    }
+
+    function debtTotal(d){
+      const amount=Number(d.amount)||0;
+      return d.type==='once' ? amount : amount*Math.max(1,Math.floor(Number(d.months)||1));
+    }
+
     function renderDebts(){
       const el=document.getElementById('debtList');
       if(!state.debts.length){
-        el.innerHTML='<div class="empty">No debts yet. Add your first payment and the forecast will appear below.</div>';
+        el.innerHTML='<div class="empty"><p>No debts yet. Add your first payment and the forecast will appear below.</p><button type="button" class="btn primary add-first-debt">Add your first debt</button></div>';
         return;
       }
       el.innerHTML = state.debts.map(d=>{
         const recurring=d.type!=='once';
-        return `<div class="debt-row" data-id="${d.id}">
-          <div class="debt-name"><strong>${escapeHtml(d.name||'Unnamed debt')}</strong><span>Starts ${fmtMonth(d.startMonth||currentMonthKey())} · ${recurring ? `${Number(d.months)||1} months` : 'one-time'}</span></div>
+        const months=recurring ? Math.max(1,Math.floor(Number(d.months)||1)) : 1;
+        return `<div class="debt-row" data-id="${escapeHtml(d.id)}">
+          <div class="debt-name"><strong>${escapeHtml(d.name||'Unnamed debt')}</strong><span>${debtEndLabel(d)} · ${recurring ? `${months} months` : 'one-time'} · ${money.format(debtTotal(d))} total</span></div>
           <div class="debt-amount">${money.format(Number(d.amount)||0)}</div>
-          <div class="meta-cell"><div class="debt-meta">${recurring ? 'per month' : 'single payment'}</div></div>
-          <div class="meta-cell"><button class="btn tiny edit-debt">Edit</button></div>
-          <button class="btn tiny danger remove-debt" aria-label="Remove debt">×</button>
+          <div class="meta-cell payment-meta"><div class="debt-meta">${recurring ? 'per month' : 'single payment'}</div></div>
+          <div class="meta-cell"><button type="button" class="btn tiny edit-debt">Edit</button></div>
+          <button type="button" class="btn tiny danger remove-debt" aria-label="Remove ${escapeHtml(d.name||'debt')}">×</button>
         </div>`;
       }).join('');
+    }
+
+    function renderForecastAlert(months){
+      const alert=document.getElementById('forecastAlert');
+      const firstNegative=months.find(m=>m.end<0);
+      if(!firstNegative){
+        alert.classList.remove('show');
+        alert.innerHTML='';
+        return;
+      }
+      alert.classList.add('show');
+      alert.innerHTML=`<div class="icon" aria-hidden="true">!</div><div><strong>You run short in ${fmtMonth(firstNegative.key)}</strong><span>The projected balance first falls below zero by ${money.format(Math.abs(firstNegative.end))}. Review the payments or income before this month.</span></div>`;
+    }
+
+    function renderChart(months){
+      const svg=document.getElementById('balanceChart');
+      const wrap=svg.parentElement;
+      const note=document.getElementById('chartNote');
+      const w=wrap.clientWidth || 720, h=wrap.clientHeight || 220;
+      const left=52, right=12, top=14, bottom=28;
+      const chartW=Math.max(1,w-left-right), chartH=Math.max(1,h-top-bottom);
+      const values=months.map(m=>m.end);
+      const max=Math.max(...values,0);
+      const min=Math.min(...values,0);
+      const range=(max-min)||1;
+      const y=v=>top+((max-v)/range)*chartH;
+      const x=i=>left+(chartW*(i/(months.length-1)));
+      const pts=months.map((m,i)=>[x(i),y(m.end)]);
+      const zeroY=Math.max(top,Math.min(top+chartH,y(0)));
+      const linePath=pts.map((p,i)=>`${i?'L':'M'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+      const dots=pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="${months[i].end<0?'#ffb5b5':'#b7e4cb'}" stroke="#0b0f0e" stroke-width="2"><title>${fmtMonth(months[i].key)} · ${money.format(months[i].end)}</title></circle>`).join('');
+      const axisY=h-8;
+      const labels=months.map((m,i)=> i===0 || i===3 || i===6 || i===9 || i===11 ? `<text x="${x(i)}" y="${axisY}" text-anchor="${i===0?'start':(i===11?'end':'middle')}">${escapeHtml(fmtMonth(m.key))}</text>` : '').join('');
+      svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+      svg.innerHTML=`
+        <line x1="${left}" x2="${w-right}" y1="${zeroY}" y2="${zeroY}" stroke="rgba(245,242,232,.18)" stroke-dasharray="4 5"/>
+        <path d="${linePath}" fill="none" stroke="#dfca98" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        ${dots}
+        <text x="${left-8}" y="12" text-anchor="end">${escapeHtml(money.format(max))}</text>
+        <text x="${left-8}" y="${Math.max(24,h-30)}" text-anchor="end">${escapeHtml(money.format(min))}</text>
+        ${labels}`;
+      const firstNeg=months.find(m=>m.end<0);
+      note.innerHTML=`<span class="${months[0].end<0?'negative':'positive'}">Now: ${money.format(months[0].end)}</span><span class="${months[11].end<0?'negative':'positive'}">Year end: ${money.format(months[11].end)}</span>${firstNeg?`<span class="negative">First shortfall: ${fmtMonth(firstNeg.key)}</span>`:'<span class="positive">No projected shortfall</span>'}`;
+      document.getElementById('chartRange').textContent=firstNeg?'12-month projection · shortfall detected':'12-month projection';
     }
 
     function renderTimeline(){
       const months=forecast();
       const maxMagnitude=Math.max(...months.map(m=>Math.abs(m.end)),1);
+      renderForecastAlert(months);
+      renderChart(months);
       document.getElementById('timeline').innerHTML=months.map((m,i)=>{
         const pct=Math.max(4,Math.min(100,(Math.abs(m.end)/maxMagnitude)*100));
         const cls=m.end>=0?'positive':'negative';
-        return `<article class="month">
-          <div class="month-head"><div><div class="month-name">${fmtFullMonth(m.key)}</div><div class="debt-meta">${i===0?'Current month':'Month '+(i+1)} · starts with ${money.format(m.start)}</div></div><div class="month-balance ${cls}">${money.format(m.end)}</div></div>
-          <div class="bar"><i style="width:${pct}%"></i></div>
-          <div class="month-stats">
-            <div class="mini"><b>${money.format(m.income)}</b><span>income</span></div>
-            <div class="mini"><b>${money.format(m.debt)}</b><span>debts</span></div>
-            <div class="mini"><b>${money.format(m.end-m.start)}</b><span>net change</span></div>
+        const problem=m.end<0;
+        const expanded=i===0;
+        return `<article class="month ${problem?'problem':''} ${expanded?'open':''}" data-month="${escapeHtml(m.key)}">
+          <button type="button" class="month-toggle" aria-expanded="${expanded}" aria-controls="month-details-${i}">
+            <span class="month-summary"><span class="month-name">${fmtMonth(m.key)}</span><span class="month-sub">${i===0?'Current month':'Month '+(i+1)} · starts with ${money.format(m.start)}</span></span>
+            <span class="month-balance ${cls}">${money.format(m.end)}</span>
+            <span class="month-arrow" aria-hidden="true">⌄</span>
+          </button>
+          <div id="month-details-${i}" class="month-details">
+            <div class="bar" aria-hidden="true"><i class="${cls}" style="width:${pct}%"></i></div>
+            <div class="month-stats">
+              <div class="mini"><b>${money.format(m.income)}</b><span>income</span></div>
+              <div class="mini"><b>${money.format(m.debt)}</b><span>debts</span></div>
+              <div class="mini"><b>${money.format(m.end-m.start)}</b><span>net change</span></div>
+            </div>
           </div>
         </article>`;
       }).join('');
@@ -335,7 +467,20 @@
       kpiCurrent.className='value '+(first.end>=0?'positive':'negative');
       kpiYear.className='value '+(yearEnd>=0?'positive':'negative');
       document.getElementById('kpiIncome').textContent=money.format(first.income);
+      document.getElementById('kpiIncomeHint').textContent=state.incomeNote?.trim() ? `Recurring · ${state.incomeNote.trim()}` : 'Recurring income';
       document.getElementById('kpiDebt').textContent=money.format(first.debt);
+
+      const debtFree=document.getElementById('debtFreeNote');
+      const futureDebtEndKeys=state.debts.map(d=>d.type==='once' ? (d.startMonth||currentMonthKey()) : addMonths(d.startMonth||currentMonthKey(),Math.max(1,Math.floor(Number(d.months)||1))-1));
+      if(!state.debts.length){
+        debtFree.innerHTML='Add a debt to see your debt-free date.';
+      } else {
+        const current=currentMonthKey();
+        const lastKey=futureDebtEndKeys.reduce((a,b)=>a>b?a:b,'0000-00');
+        debtFree.innerHTML = lastKey < current
+          ? 'Debt-free already.'
+          : `Projected debt-free date: <strong>${fmtMonth(lastKey)}</strong>`;
+      }
     }
 
     function render(){ renderInputs(); renderDebts(); renderTimeline(); renderKPIs(); }
@@ -343,8 +488,11 @@
     function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
 
     let editingDebtId=null;
+    let removedDebtUndo=null;
+    let modalReturnFocus=null;
 
     function openDebtModal(id=null){
+      modalReturnFocus=document.activeElement instanceof HTMLElement ? document.activeElement : null;
       editingDebtId=id;
       const d=id ? state.debts.find(x=>x.id===id) : {name:'',amount:'',startMonth:currentMonthKey(),type:'recurring',months:3};
       if(!d) return;
@@ -359,11 +507,23 @@
       setTimeout(()=>document.getElementById('debtName').focus(),30);
     }
 
-    function closeDebtModal(){
+    function closeDebtModal(focusTarget=null){
       const bd=document.getElementById('modalBackdrop'); bd.classList.remove('show'); bd.setAttribute('aria-hidden','true'); editingDebtId=null;
+      const target=focusTarget && document.contains(focusTarget) ? focusTarget : (modalReturnFocus && document.contains(modalReturnFocus) ? modalReturnFocus : null);
+      if(target) target.focus();
+      else document.getElementById('debtList')?.focus?.();
+      modalReturnFocus=null;
     }
 
-    function toggleMonths(){ document.getElementById('monthsWrap').style.display=document.getElementById('debtType').value==='once'?'none':'flex'; }
+    function toggleMonths(){
+      const recurring=document.getElementById('debtType').value!=='once';
+      const wrap=document.getElementById('monthsWrap');
+      const input=document.getElementById('debtMonths');
+      wrap.style.display=recurring?'flex':'none';
+      input.disabled=!recurring;
+      input.required=recurring;
+      if(!recurring) input.setCustomValidity('');
+    }
 
     function saveDebtFromModal(e){
       e.preventDefault();
@@ -374,32 +534,95 @@
         type:document.getElementById('debtType').value==='once'?'once':'recurring',
         months:Math.max(1,Math.floor(Number(document.getElementById('debtMonths').value)||1))
       };
+      if(!e.target.checkValidity()) { e.target.reportValidity(); return; }
+      const savedId=editingDebtId || null;
       if(editingDebtId){ const d=state.debts.find(x=>x.id===editingDebtId); Object.assign(d,data); toast('Debt updated'); }
-      else { state.debts.push({id:uid(),...data}); toast('Debt added'); }
-      save(true); closeDebtModal(); render();
+      else { const newDebt={id:uid(),...data}; state.debts.push(newDebt); }
+      save(true);
+      render();
+      const focusTarget=savedId
+        ? document.querySelector(`.debt-row[data-id="${CSS.escape(savedId)}"] .edit-debt`)
+        : document.querySelector('.debt-row .edit-debt') || document.getElementById('addDebt');
+      closeDebtModal(focusTarget);
     }
 
     function removeDebt(id){
-      state.debts=state.debts.filter(d=>d.id!==id); save(true); render(); toast('Debt removed');
+      const index=state.debts.findIndex(d=>d.id===id);
+      if(index<0) return;
+      const [removed]=state.debts.splice(index,1);
+      save(true); render();
+      removedDebtUndo={debt:removed,index,token:uid()};
+      toast('Debt removed', 'Undo', ()=>{
+        if(!removedDebtUndo || removedDebtUndo.token===undefined) return;
+        const item=removedDebtUndo;
+        state.debts.splice(Math.min(item.index,state.debts.length),0,item.debt);
+        removedDebtUndo=null;
+        save(true); render(); toast('Debt restored');
+      });
     }
 
-    function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(window.__toast); window.__toast=setTimeout(()=>t.classList.remove('show'),1300); }
+    function toast(msg,actionLabel='',actionHandler=null){
+      const t=document.getElementById('toast');
+      const message=t.querySelector('.toast-message');
+      const action=t.querySelector('.toast-action');
+      message.textContent=msg;
+      if(actionHandler){
+        action.hidden=false; action.textContent=actionLabel; action.onclick=()=>{hideToast();actionHandler();};
+      } else {
+        action.hidden=true; action.onclick=null;
+      }
+      t.classList.add('show'); clearTimeout(window.__toast); window.__toast=setTimeout(()=>hideToast(), actionHandler?4500:1300);
+    }
+    function hideToast(){
+      const t=document.getElementById('toast'); t.classList.remove('show');
+    }
 
-    document.getElementById('startBalance').addEventListener('input',e=>{state.startBalance=Math.max(0,Number(e.target.value)||0);save(true);renderTimeline();renderKPIs();});
+    document.getElementById('startBalance').addEventListener('input',e=>{state.startBalance=Number(e.target.value)||0;save(true);renderTimeline();renderKPIs();});
     document.getElementById('monthlyIncome').addEventListener('input',e=>{state.monthlyIncome=Math.max(0,Number(e.target.value)||0);save(true);renderTimeline();renderKPIs();});
-    document.getElementById('incomeNote').addEventListener('input',e=>{state.incomeNote=e.target.value;save(true);});
+    document.getElementById('incomeNote').addEventListener('input',e=>{state.incomeNote=e.target.value;save(true);renderKPIs();});
     document.getElementById('addDebt').addEventListener('click',()=>openDebtModal());
+    document.getElementById('addDebtFab').addEventListener('click',()=>openDebtModal());
     document.getElementById('clearAll').addEventListener('click',()=>{ if(confirm('Reset the whole ledger?')){state=structuredClone(defaultState);save(true);render();toast('Ledger reset');} });
-    document.getElementById('debtList').addEventListener('click',e=>{ const row=e.target.closest('.debt-row'); if(!row) return; const id=row.dataset.id; if(e.target.closest('.remove-debt')) removeDebt(id); if(e.target.closest('.edit-debt')) openDebtModal(id); });
+    document.getElementById('debtList').addEventListener('click',e=>{
+      const first=e.target.closest('.add-first-debt'); if(first){openDebtModal();return;}
+      const row=e.target.closest('.debt-row'); if(!row) return; const id=row.dataset.id;
+      if(e.target.closest('.remove-debt')) removeDebt(id); else if(e.target.closest('.edit-debt')) openDebtModal(id);
+    });
+    document.getElementById('timeline').addEventListener('click',e=>{
+      const btn=e.target.closest('.month-toggle'); if(!btn) return;
+      const month=btn.closest('.month'); const open=month.classList.toggle('open'); btn.setAttribute('aria-expanded',String(open));
+    });
     document.getElementById('debtForm').addEventListener('submit',saveDebtFromModal);
     document.getElementById('debtType').addEventListener('change',toggleMonths);
     document.getElementById('closeModal').addEventListener('click',closeDebtModal);
     document.getElementById('cancelModal').addEventListener('click',closeDebtModal);
     document.getElementById('modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop') closeDebtModal();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape') closeDebtModal();});
+    document.addEventListener('keydown',e=>{
+      const bd=document.getElementById('modalBackdrop');
+      if(!bd.classList.contains('show')) return;
+      if(e.key==='Escape'){ e.preventDefault(); closeDebtModal(); return; }
+      if(e.key==='Tab'){
+        const modal=document.getElementById('debtForm');
+        const focusable=Array.from(modal.querySelectorAll('button, input, select, textarea, [tabindex]:not([tabindex="-1"])')).filter(el=>!el.disabled && el.offsetParent!==null);
+        if(!focusable.length) return;
+        const first=focusable[0], last=focusable[focusable.length-1];
+        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+      }
+    });
+    const chartResizeObserver=new ResizeObserver(()=>renderChart(forecast()));
+    chartResizeObserver.observe(document.querySelector('.chart-wrap'));
     document.getElementById('exportBtn').addEventListener('click',()=>{
-      const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),...state},null,2)],{type:'application/json'});
-      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='inner-ledger.json'; a.click(); URL.revokeObjectURL(a.href); toast('Exported');
+      try{
+        const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),...state},null,2)],{type:'application/json'});
+        const a=document.createElement('a');
+        const url=URL.createObjectURL(blob);
+        a.href=url; a.download='inner-ledger.json'; a.click();
+        setTimeout(()=>URL.revokeObjectURL(url),1000);
+        toast('Exported');
+      } catch(err){
+        console.error(err); toast('Could not export');
+      }
     });
 
     render();
